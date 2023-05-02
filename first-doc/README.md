@@ -1,5 +1,5 @@
 # kubebuilder 架构图
-![kubebuilder 架构图](./images/kubebuilder-arch.png)
+![kubebuilder 架构图](./images/kubebuild-architecture.png)
 
 # GVK、GVR
 GVK:
