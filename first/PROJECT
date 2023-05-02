@@ -2,19 +2,21 @@
 # This file is used to track the info used to scaffold your project
 # and allow the plugins properly work.
 # More info: https://book.kubebuilder.io/reference/project-config.html
-domain: candy-box.top
+
+# kubebuilder 元数据
+domain: candy-box.top    # 域名
 layout:
-- go.kubebuilder.io/v3
-projectName: firest
-repo: github.com/candy44777/operator-app/firest
-resources:
+- go.kubebuilder.io/v3   # kubebuilder 插件版本
+projectName: firest      # 项目名称，默认为当前目录名称
+repo: github.com/candy44777/operator-app/firest  # 项目地址
+resources:    # 可以有多个资源
 - api:
-    crdVersion: v1
-    namespaced: true
-  controller: true
-  domain: candy-box.top
-  group: demo
-  kind: App
-  path: github.com/candy44777/operator-app/firest/api/v1
-  version: v1
-version: "3"
+    crdVersion: v1      # crd 版本
+    namespaced: true    # 是否命名空间级别
+  controller: true      # 是否生成 controller
+  domain: candy-box.top   # 域名
+  group: demo             # 分组
+  kind: App               # 资源名称
+  path: github.com/candy44777/operator-app/firest/api/v1   # 资源路径，相当于RESTFUL API的路径
+  version: v1   # 资源版本
+version: "3"    # kubebuilder 版本

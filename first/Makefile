@@ -1,10 +1,11 @@
 
 # Image URL to use all building/pushing image targets
-IMG ?= controller:latest
+IMG ?= controller:latest # 如果没有指定 IMG 这个变量，就使用 controller:latest
 # ENVTEST_K8S_VERSION refers to the version of kubebuilder assets to be downloaded by envtest binary.
 ENVTEST_K8S_VERSION = 1.26.0
 
 # Get the currently used golang install path (in GOPATH/bin, unless GOBIN is set)
+# 如果 shell 环境变量中没有 GOBIN 这个变量，就使用 GOPATH/bin 这个变量，否则使用 GOBIN 这个变量
 ifeq (,$(shell go env GOBIN))
 GOBIN=$(shell go env GOPATH)/bin
 else
@@ -13,11 +14,16 @@ endif
 
 # Setting SHELL to bash allows bash commands to be executed by recipes.
 # Options are set to exit when a recipe line exits non-zero or a piped command fails.
+# 这个表示，如果 Makefile 中的命令执行失败，就退出，不再继续执行后面的命令
 SHELL = /usr/bin/env bash -o pipefail
+# 检查语法错误
 .SHELLFLAGS = -ec
 
-.PHONY: all
-all: build
+# .PHONY后面跟的目标都被称为伪目标，也就是说我们 make 命令后面跟的参数如果出现在.PHONY 定义的伪目标中，
+# 那就直接在Makefile中就执行伪目标的依赖和命令。不管Makefile同级目录下是否有该伪目标同名的文件，即使有也不会产生冲突
+# 如果执行 make 没有任何参数，默认执行第一个伪目标，也就是 all
+.PHONY: all  # 如执行 make all，就会执行下面的 build
+all: build   # all 伪目标的依赖是 build，也就是说执行 make all 时，会先执行 make build
 
 ##@ General
 

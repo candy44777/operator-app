@@ -1,6 +1,8 @@
 # Build the manager binary
 FROM golang:1.19 as builder
+# 系统类型
 ARG TARGETOS
+# 架构类型
 ARG TARGETARCH
 
 WORKDIR /workspace

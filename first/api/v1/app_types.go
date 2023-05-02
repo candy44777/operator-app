@@ -28,14 +28,19 @@ type AppSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 
-	// Foo is an example field of App. Edit app_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
+	// Action is the action to be performed by the operator
+	Action string `json:"action,required"`
+	// Object is the object on which the action is to be performed
+	Object string `json:"object,required"`
 }
 
 // AppStatus defines the observed state of App
 type AppStatus struct {
 	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
+
+	// Result show the result
+	Result string `json:"result"`
 }
 
 //+kubebuilder:object:root=true

@@ -32,5 +32,6 @@ var (
 	SchemeBuilder = &scheme.Builder{GroupVersion: GroupVersion}
 
 	// AddToScheme adds the types in this group-version to the given scheme.
+	// 在 main 包中定义的 Scheme 变量，用于注册 GroupVersionKind
 	AddToScheme = SchemeBuilder.AddToScheme
 )

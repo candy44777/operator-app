@@ -37,19 +37,26 @@ import (
 )
 
 var (
-	scheme   = runtime.NewScheme()
+	// scheme 用于注册类型, 用于反序列化 k8s 对象, GVK 信息
+	scheme = runtime.NewScheme()
+	// setupLog 用于记录日志
 	setupLog = ctrl.Log.WithName("setup")
 )
 
 func init() {
+	// 注册 k8s 内置的类型 scheme
 	utilruntime.Must(clientgoscheme.AddToScheme(scheme))
 
+	// 注册自定义类型 scheme
 	utilruntime.Must(demov1.AddToScheme(scheme))
 	//+kubebuilder:scaffold:scheme
 }
 
 func main() {
 	var metricsAddr string
+	// 是否开启 leader 选举, 默认为 false, 也就是说默认情况下, 一个集群中可以有多个 controller-manager,
+	// 但是只有一个是 leader 状态, 其他的都是 follower 状态, leader 会负责处理所有的任务, follower 会监听 leader 的状态
+	// 如果 leader 挂了, follower 会重新选举一个 leader, 重新选举的过程中, follower 会暂停处理任务
 	var enableLeaderElection bool
 	var probeAddr string
 	flag.StringVar(&metricsAddr, "metrics-bind-address", ":8080", "The address the metric endpoint binds to.")
